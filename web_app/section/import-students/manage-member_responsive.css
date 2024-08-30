@@ -1,0 +1,223 @@
+/* Small devices (Phone 0-576px) */
+@media (max-width: 576px) { 
+    /* Header details */
+    .container {
+        max-width: 415px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: start;
+    }
+    /* Manage Members */
+    .container-weeks {
+        max-width: 415px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    /* More & import  */
+    .container-header-weeks {
+        max-width: 375px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: space-between;
+        padding: 20px;
+    }
+    /* More details */
+    .container-count-std {
+        height: 150px;
+        width: 100%;
+        padding: 30px;
+        margin: 0px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    /* Imort form */
+    .container-form {
+        font-size: 12px;
+        width: 100%;
+        padding: 30px;
+        background-color: #ffffff;
+        margin: 0px 0px 20px 0px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    .container-form button {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    /* Header table */
+    th {
+        font-size: 10px;
+        text-align: center;
+        vertical-align: top;
+    }
+    /* details table */
+    td {
+        font-size: 7px;
+        text-align: center;
+        color: black; /* ตั้งค่าสีฟอนต์เป็นสีดำ */
+        text-decoration: none; /* ลบการขีดเส้นใต้ */
+    }
+    /* Action Btn */
+    .custom-btn {
+        font-size: 9px;
+        width:  40px;
+        padding: 3px 6px;
+        margin: 3px;
+    }
+    .footer {
+        font-size: 12px;
+    }
+
+}
+
+/*Medium devices (tablets, 576px and up)*/
+@media (min-width: 576px) { 
+    .container {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: start;
+    }
+    .container-weeks {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    .container-header-weeks {
+        display: flex;
+        justify-content: space-between;
+        max-width: 700px;
+        margin: 30px 0px 30px 0px ;
+    }
+    .container-count-std {
+        min-width: 300px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    .container-form {
+        max-width: 300px;
+        padding: 30px;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    th {
+        font-size: 16px;
+        text-align: center;
+        vertical-align: top;
+    }
+    td {
+        font-size: 14px;
+        text-align: center;
+    }
+    .custom-btn {
+        width:  80px;
+        padding: 6px 12px;
+        margin: 3px;
+    }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) { 
+    .navbar-custom .nav-link {
+        color: rgb(46, 46, 46);
+        padding-bottom: 5px;
+        position: relative;
+    }
+
+    .navbar-custom .nav-link::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        height: 4px; /* ปรับความหนาของเส้น */
+        background-color: #7124ff; /* สีของเส้นใต้ */
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transition: width 0.3s ease;
+    }
+
+    .navbar-custom .nav-link:hover::after,
+    .navbar-custom .nav-link.active::after {
+        width: 100%;
+    }
+    
+    .container {
+        max-width: 1000px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        text-align: start;
+    }
+    .container-weeks {
+        max-width: 1000px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    .container-header-weeks {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1000px;
+        margin: 30px 0px 30px 0px ;
+    }
+    .container-count-std {
+        min-width: 550px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    .container-form {
+        max-width: 300px;
+        padding: 30px;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    th {
+        font-size: 16px;
+        text-align: center;
+        vertical-align: top;
+    }
+    td {
+        font-size: 16px;
+        text-align: center;
+    }
+    .custom-btn {
+        font-size: 14px; /* ขนาดฟอนต์ */
+        padding: 8px 16px; /* ขนาด padding ของปุ่ม */
+        display: inline-block;
+        width: 80px; /* กำหนดความกว้างของปุ่ม */
+        text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
+        line-height: 1.5; /* ความสูงของบรรทัดเพื่อให้ปุ่มมีความสูงเท่ากัน */
+        margin: 5px;
+    }
+}
+
