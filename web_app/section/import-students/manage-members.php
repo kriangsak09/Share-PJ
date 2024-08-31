@@ -38,9 +38,6 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="<?php echo htmlspecialchars($url_attendance); ?>">Attendance Check</a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="<?php echo htmlspecialchars($url_home); ?>">Home</a>
-                        </li>                    
                     </ul>
                 </div>
             </nav>
@@ -94,26 +91,27 @@
                     echo "<h5>Student List</h5>";
                     echo "<hr>";
 
+                    echo "<div class='table-container'>";
                     echo "<table class='table table-striped table-bordered'>";
-                    echo "<thead class='thead-dark'><tr><th>Student Number</th><th>First Name</th><th>Last Name</th><th>Faculty</th><th>Field of Study</th><th>Action</th></tr></thead>";
+                    echo "<thead class='thead-dark'><tr><th class='col-1'>No</th><th class='col-2'>Student Number</th><th class='col-3'>Name</th><th class='col-4'>Faculty (Branch)</th><th class='col-5'>Action</th></tr></thead>";
                     echo "<tbody>";
 
                     //แสดงรายชื่อนักศึกษาใน section หากมี
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
+                        echo "<td>" . $row['id'] . "</td>";
                         echo "<td>" . $row['student_number'] . "</td>";
-                        echo "<td>" . $row['first_name'] . "</td>";
-                        echo "<td>" . $row['last_name'] . "</td>";
-                        echo "<td>" . $row['Faculty'] . "</td>";
-                        echo "<td>" . $row['Field_of_study'] . "</td>";
+                        echo "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
+                        echo "<td>" . $row['Faculty'] . " - " . $row['Field_of_study'] . "</td>";
+                        // echo "<td>" . $row['Faculty'] . " (" . $row['Field_of_study'] . ") " . "</td>";
                         echo "<td>";
-                        // Edit Btn
-                        // echo "<a href='edit-members.php?id=" . $row['id'] . "&table_name=" . $table_name . "' class='btn btn-warning custom-btn'>Edit</a>";                        
                         // Delete Btn
                         echo "<a href='delete-members.php?id=" . $row['id'] . "&table_name=" . $table_name . "' class='btn btn-danger custom-btn' onclick=\"return confirm('Are you sure you want to delete this student?');\">Delete</a>";
                         echo "</td>";
                     }
                     echo "</tbody></table>";
+                    echo "</div>";
+
                 } else {
                     // การแสดงผลส่วน Import Student กรณีที่ไม่มีนักศึกษาใน section                     
                     echo "<div class='container-members-fluid mt-5'>";

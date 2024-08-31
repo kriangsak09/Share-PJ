@@ -69,21 +69,53 @@ $url_home = './index.php';
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
-        /* Topic */
-        th {
-            font-size: 10px;
-            text-align: center;
-            vertical-align: top;
+        /* table custom */
+        .table-container {
+            width: 100%;  /* กำหนดความกว้างของตาราง */
         }
-        /* details */
+        table th {
+            font-size: 8px;
+            padding: 8px; /* กำหนด padding ภายในเซลล์ */
+            border: 1px solid #ddd; /* เส้นขอบของเซลล์ */
+            text-align: center; /* จัดข้อความให้อยู่ซ้าย */
+            vertical-align: top; /* จัดข้อความให้อยู่ด้านบนของเซลล์ */
+            text-decoration: none; /* ลบการขีดเส้นใต้ */
+        }    
+        table td {
+            font-size: 7px;
+            padding: 6px; /* กำหนด padding ภายในเซลล์ */
+            border: 1px solid #ddd; /* เส้นขอบของเซลล์ */
+            text-align: center; /* จัดข้อความให้อยู่ซ้าย */
+            vertical-align: top; /* จัดข้อความให้อยู่ด้านบนของเซลล์ */
+            text-decoration: none; /* ลบการขีดเส้นใต้ */
+        } 
         td {
-            font-size: 10px;
-            text-align: center;
+            word-wrap: break-word; /* ตัดคำเมื่อข้อความยาวเกินขนาดที่กำหนด */
+            white-space: normal; /* อนุญาตให้ตัดบรรทัดในข้อความ */
+            overflow: hidden; /* ซ่อนข้อความที่ยาวเกิน */
         }
+        th.col-1 {
+            width: 20px; /* Week */
+        }
+        th.col-2 {
+            width: 150px; /* Date */
+        }
+        th.col-3 {
+            width: 160px; /* P time */
+        }
+        th.col-4 {
+            width: 160px; /* L time */
+        }
+        th.col-5 {
+            width: 160px; /* A time */
+        } 
+        th.col-6 {
+            width: 60px; /* Action */
+        } 
         /* Action Btn */
         .custom-btn {
-            font-size: 9px;
-            width:  40px;
+            font-size: 8px;
+            width:  38px;
             padding: 3px 6px;
             margin: 3px;
         }
@@ -123,53 +155,82 @@ $url_home = './index.php';
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
         }
-        /* Topic */
-        th {
-            font-size: 15px;
-            text-align: center;
-            vertical-align: top;
+        
+        /* table custom */
+        .table-container {
+            width: 100%;  /* กำหนดความกว้างของตาราง */
         }
-        /* details */
+        table th {
+            font-size: 11px;
+            padding: 8px; /* กำหนด padding ภายในเซลล์ */
+            border: 1px solid #ddd; /* เส้นขอบของเซลล์ */
+            text-align: center; /* จัดข้อความให้อยู่ซ้าย */
+            vertical-align: top; /* จัดข้อความให้อยู่ด้านบนของเซลล์ */
+            text-decoration: none; /* ลบการขีดเส้นใต้ */
+        }    
+        table td {
+            font-size: 10px;
+            padding: 6px; /* กำหนด padding ภายในเซลล์ */
+            border: 1px solid #ddd; /* เส้นขอบของเซลล์ */
+            text-align: center; /* จัดข้อความให้อยู่ซ้าย */
+            vertical-align: top; /* จัดข้อความให้อยู่ด้านบนของเซลล์ */
+            text-decoration: none; /* ลบการขีดเส้นใต้ */
+        } 
         td {
-            font-size: 15px;
-            text-align: center;
+            word-wrap: break-word; /* ตัดคำเมื่อข้อความยาวเกินขนาดที่กำหนด */
+            white-space: normal; /* อนุญาตให้ตัดบรรทัดในข้อความ */
+            overflow: hidden; /* ซ่อนข้อความที่ยาวเกิน */
         }
+        th.col-1 {
+            width: 20px; /* Week */
+        }
+        th.col-2 {
+            width: 150px; /* Date */
+        }
+        th.col-3 {
+            width: 160px; /* P time */
+        }
+        th.col-4 {
+            width: 160px; /* L time */
+        }
+        th.col-5 {
+            width: 160px; /* A time */
+        } 
+        th.col-6 {
+            width: 100px; /* Action */
+        } 
         /* Action Btn */
         .custom-btn {
-            font-size: 14px; /* ขนาดฟอนต์ */
-            padding: 6px 12px; /* ขนาด padding ของปุ่ม */
-            display: inline-block;
-            width: 80px; /* กำหนดความกว้างของปุ่ม */
-            text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
-            line-height: 1.5; /* ความสูงของบรรทัดเพื่อให้ปุ่มมีความสูงเท่ากัน */
-            margin: 5px;
+            font-size: 10px;
+            width:  50px;
+            padding: 4px 8px;
+            margin: 3px;
         }
     }
     /*Large devices (desktops, 992px and up)*/
     @media (min-width: 992px) { 
         .navbar-custom .nav-link {
-                color: rgb(46, 46, 46);
-                padding-bottom: 5px;
-                position: relative;
-            }
+            color: rgb(46, 46, 46);
+            padding-bottom: 5px;
+            position: relative;
+        }
 
-            .navbar-custom .nav-link::after {
-                content: "";
-                display: block;
-                width: 0;
-                height: 2px;
-                height: 4px; /* ปรับความหนาของเส้น */
-                background-color: #7124ff; /* สีของเส้นใต้ */
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                transition: width 0.3s ease;
-            }
-
-            .navbar-custom .nav-link:hover::after,
-            .navbar-custom .nav-link.active::after {
-                width: 100%;
-            }
+        .navbar-custom .nav-link::after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 2px;
+            height: 4px; /* ปรับความหนาของเส้น */
+            background-color: #7124ff; /* สีของเส้นใต้ */
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        .navbar-custom .nav-link:hover::after,
+        .navbar-custom .nav-link.active::after {
+            width: 100%;
+        }
             
         .container {
             max-width: 1000px;
@@ -196,6 +257,59 @@ $url_home = './index.php';
             background-color: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+        }
+        /* table custom */
+        .table-container {
+            width: 100%;  /* กำหนดความกว้างของตาราง */
+        }
+        table th {
+            font-size: 14px;
+            padding: 8px; /* กำหนด padding ภายในเซลล์ */
+            border: 1px solid #ddd; /* เส้นขอบของเซลล์ */
+            text-align: center; /* จัดข้อความให้อยู่ซ้าย */
+            vertical-align: top; /* จัดข้อความให้อยู่ด้านบนของเซลล์ */
+            text-decoration: none; /* ลบการขีดเส้นใต้ */
+        }    
+        table td {
+            font-size: 14px;
+            padding: 6px; /* กำหนด padding ภายในเซลล์ */
+            border: 1px solid #ddd; /* เส้นขอบของเซลล์ */
+            text-align: center; /* จัดข้อความให้อยู่ซ้าย */
+            vertical-align: top; /* จัดข้อความให้อยู่ด้านบนของเซลล์ */
+            text-decoration: none; /* ลบการขีดเส้นใต้ */
+        } 
+        td {
+            word-wrap: break-word; /* ตัดคำเมื่อข้อความยาวเกินขนาดที่กำหนด */
+            white-space: normal; /* อนุญาตให้ตัดบรรทัดในข้อความ */
+            overflow: hidden; /* ซ่อนข้อความที่ยาวเกิน */
+        }
+        th.col-1 {
+            width: 20px; /* Week */
+        }
+        th.col-2 {
+            width: 150px; /* Date */
+        }
+        th.col-3 {
+            width: 160px; /* P time */
+        }
+        th.col-4 {
+            width: 160px; /* L time */
+        }
+        th.col-5 {
+            width: 160px; /* A time */
+        } 
+        th.col-6 {
+            width: 100px; /* Action */
+        } 
+        /* Action Btn */
+        .custom-btn {
+            font-size: 14px; /* ขนาดฟอนต์ */
+            padding: 8px 16px; /* ขนาด padding ของปุ่ม */
+            display: inline-block;
+            width: 80px; /* กำหนดความกว้างของปุ่ม */
+            text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
+            line-height: 1.5; /* ความสูงของบรรทัดเพื่อให้ปุ่มมีความสูงเท่ากัน */
+            margin: 3px;
         }
     } 
 </style>
@@ -225,9 +339,6 @@ $url_home = './index.php';
                         <li class="nav-item active">
                             <a class="nav-link" href="<?php echo htmlspecialchars($url_report); ?>">Report daily</a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="<?php echo htmlspecialchars($url_home); ?>">Home</a>
-                        </li>                    
                     </ul>
                 </div>
             </nav>
@@ -262,10 +373,10 @@ $url_home = './index.php';
 
                     // แสดงข้อมูลตารางสัปดาห์
                     if ($result->num_rows > 0) {
-                        echo "<div class='full-width'>";
+                        echo "<div class='table-container'>";
                         echo "<table class='table table-striped'>";
                         echo "<caption>Schedule plan</caption>";
-                        echo "<thead><tr><th>Week</th><th>Date</th><th>Present time</th><th>Late time</th><th>Absent time</th><th>Action</th></tr></thead>";
+                        echo "<thead><tr><th class='col-1'>Week</th><th class='col-2'>Date</th><th class='col-3'>Present time</th><th class='col-4'>Late time</th><th class='col-5'>Absent time</th><th class='col-6'>Action</th></tr></thead>";
                         echo "<tbody>";
 
                         while ($row = $result->fetch_assoc()) {
