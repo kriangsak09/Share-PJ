@@ -74,7 +74,7 @@ $url_home = './index.php';
             width: 100%;  /* กำหนดความกว้างของตาราง */
         }
         table th {
-            font-size: 8px;
+            font-size: 9px;
             padding: 8px; /* กำหนด padding ภายในเซลล์ */
             border: 1px solid #ddd; /* เส้นขอบของเซลล์ */
             text-align: center; /* จัดข้อความให้อยู่ซ้าย */
@@ -82,7 +82,7 @@ $url_home = './index.php';
             text-decoration: none; /* ลบการขีดเส้นใต้ */
         }    
         table td {
-            font-size: 7px;
+            font-size: 9px;
             padding: 6px; /* กำหนด padding ภายในเซลล์ */
             border: 1px solid #ddd; /* เส้นขอบของเซลล์ */
             text-align: center; /* จัดข้อความให้อยู่ซ้าย */
@@ -98,16 +98,16 @@ $url_home = './index.php';
             width: 20px; /* Week */
         }
         th.col-2 {
-            width: 150px; /* Date */
+            width: 160px; /* Date */
         }
         th.col-3 {
-            width: 160px; /* P time */
+            width: 100px; /* P time */
         }
         th.col-4 {
-            width: 160px; /* L time */
+            width: 100px; /* L time */
         }
         th.col-5 {
-            width: 160px; /* A time */
+            width: 100px; /* A time */
         } 
         th.col-6 {
             width: 60px; /* Action */
@@ -381,7 +381,7 @@ $url_home = './index.php';
 
                         while ($row = $result->fetch_assoc()) {
                             $week_number = htmlspecialchars($row["week_number"]);
-                            $week_date = htmlspecialchars($row["week_date"]);
+                            $week_date = date('d-m-Y', strtotime($row['week_date'])); // จัดรูปแบบวันที่เป็น วัน-เดือน-ปี
                             $on_time_time = htmlspecialchars($row["on_time_time"]);
                             $late_time = htmlspecialchars($row["late_time"]);
                             $absent_time = htmlspecialchars($row["absent_time"]);

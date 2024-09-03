@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include 'config.php';
 session_start();
 
 // รับข้อมูลผู้ใช้จาก URL หรือ Session
@@ -48,12 +48,12 @@ if (!empty($selectedAcademicSemester)) {
 
 // เตรียม SQL Query สำหรับค้นหาข้อมูล
 $sql = "
-    SELECT c.*, 
+    SELECT c.*,
            cl.room_number, cl.floor, cl.building
     FROM courses c
     LEFT JOIN classrooms cl ON c.classroom_id = cl.id
-    WHERE (c.teacher_id = :userName 
-           OR c.teacher2_id = :userName 
+    WHERE (c.teacher_id = :userName
+           OR c.teacher2_id = :userName
            OR c.teacher3_id = :userName)
 ";
 
@@ -95,10 +95,10 @@ try {
 try {
     // Query สำหรับดึงข้อมูล academic_year และ semester โดยกรองตาม teacher_id ของผู้ใช้
     $stmt = $conn->prepare("
-        SELECT DISTINCT academic_year, semester 
-        FROM courses 
-        WHERE teacher_id = :userName 
-        OR teacher2_id = :userName 
+        SELECT DISTINCT academic_year, semester
+        FROM courses
+        WHERE teacher_id = :userName
+        OR teacher2_id = :userName
         OR teacher3_id = :userName
     ");
     $stmt->bindParam(':userName', $userName);
@@ -109,11 +109,12 @@ try {
     echo "Error: " . $e->getMessage();
 }
 
-// Define colors
-$colors = ['purple', '#33FF57', '#F3FF33', '#FF33A6', '#33FFF0', '#F4A7B9'];
+// สีของปุ่ม section มีดังนี้ โดยสีพวกนี้จะทำการสุ่มตามที่เราเพิ่มในโค้ดนี้
+$colors = ['#4a235a', '#943126', '#196f3d', '#21618c', '#283747', '#af601a'];
 
 // Function to get color for a course ID
-function getColorForCourse($courseId) {
+function getColorForCourse($courseId)
+{
     global $colors;
     if (!isset($_SESSION['course_colors'])) {
         $_SESSION['course_colors'] = [];
@@ -133,15 +134,16 @@ foreach ($courses as $index => $course) {
 }
 
 // Assuming you have $courses array populated
-function dayOfWeekToNumber($day) {
+function dayOfWeekToNumber($day)
+{
     $days = ['Sunday' => 0, 'Monday' => 1, 'Tuesday' => 2, 'Wednesday' => 3, 'Thursday' => 4, 'Friday' => 5, 'Saturday' => 6];
     return $days[$day];
 }
 
-usort($courses, function($a, $b) {
+usort($courses, function ($a, $b) {
     $dayA = dayOfWeekToNumber($a['day_of_week']);
     $dayB = dayOfWeekToNumber($b['day_of_week']);
-    
+
     if ($dayA == $dayB) {
         return strtotime($a['start_time']) - strtotime($b['start_time']);
     }
@@ -158,11 +160,12 @@ usort($courses, function($a, $b) {
     <meta name="author" content="" />
     <title>Simple Sidebar - Start Bootstrap Template</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="assets/knowledge.png" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -210,88 +213,23 @@ usort($courses, function($a, $b) {
     white-space: nowrap; /* ป้องกันการตัดคำ */
 }
 
-/* ปรับแต่งสำหรับหน้าจอขนาดเล็ก */
-@media screen and (max-width: 1024px), (max-width: 768px), (max-width: 640px) {
-    
-    .sidebar-heading {
-        padding: 15px;
-    }
-   /* Default sidebar styling */
-#sidebar-wrapper {
-    width: 250px;
-    background-color: #f8f9fa;
-    border-right: 1px solid #ddd;
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: -250px; /* Hide sidebar by default */
-    transition: left 0.3s ease;
-}
-
-/* ตัวเเปร overlay เป็นส่วนของตอนเลื่อนข้อมูลจากทางด้านซ้ายที่มีฟังชั่นต่างๆ เช่นการกดตรงเงาเเล้วข้อมูลจะเลื่อนกลับ */
-/* Overlay styling */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none; /* Hidden by default */
-    z-index: 998; /* Higher than content */
-}
-
-/* Show sidebar and overlay when toggled */
-#wrapper.toggled #sidebar-wrapper {
-    left: 0; /* Show sidebar */
-    z-index: 999; /* Higher than overlay */
-}
-
-#wrapper.toggled .overlay {
-    display: block; /* Show overlay */
-}
-
-#wrapper.sb-sidenav-toggled #sidebar-wrapper {
-        left: 0;
-        z-index: 999; /* Higher than overlay */
-        transition: left 0.3s ease;
-    }
-
-    #wrapper.sb-sidenav-toggled .overlay {
-        display: block;
-        transition: left 0.3s ease;
-    }
-
-    .table-container {
-        padding: 15px;
-    }
-
-    .table-title {
-        font-size: 20px;
-        max-width: 90%;
-    }
-
-    .table th, .table td {
-        font-size: 0.9em;
-        padding: 6px;
-    }
-}
 
 /* ปรับแต่งสำหรับหน้าจอขนาดเล็กมาก */
-@media screen and (max-width: 480px) {
-    
+@media screen and (max-width: 580px) {
+
     .sidebar-heading {
         padding: 10px;
     }
     #sidebar-wrapper {
-    width: 250px;
+    width: 300px;
     background-color: #f8f9fa;
     border-right: 1px solid #ddd;
     position: fixed;
     height: 100%;
     top: 0;
     left: -250px; /* Hide by default */
-    transition: left 0.3s ease;
+    transition: all 0.3s ease;
+    overflow-y: auto; /* เพิ่มคุณสมบัติ overflow */
 }
 
 .overlay {
@@ -325,7 +263,7 @@ usort($courses, function($a, $b) {
         transition: left 0.3s ease;
     }
 
-    
+
     .table-container {
         padding: 10px;
     }
@@ -342,9 +280,23 @@ usort($courses, function($a, $b) {
     .table-title {
         max-width: 100%;
     }
+
+    .form-label {
+    font-size: 0.9em;
+    }
 }
 
         .form-group {
+            margin-bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-label{
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-bottom: 0;
         }
 
@@ -414,7 +366,7 @@ usort($courses, function($a, $b) {
 
 
 .subject-name {
-    font-size: 70px; /* ขนาดตัวอักษรสำหรับชื่อวิชา */
+    font-size: 50px; /* ขนาดตัวอักษรสำหรับชื่อวิชา */
     font-weight: bold; /* ทำให้ชื่อวิชาหนาขึ้น */
 }
 
@@ -436,7 +388,7 @@ usort($courses, function($a, $b) {
 
 .btn-circle:hover {
     background-color: #f0f0f0; /* เปลี่ยนสีพื้นหลังเมื่อเมาส์เลื่อนมาที่ปุ่ม */
-    transform: scale(1.05); /* ขยายปุ่มเล็กน้อย */
+    transform: scale(1.20); /* ขยายปุ่มเล็กน้อย */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาให้ปุ่ม */
 }
 
@@ -481,10 +433,10 @@ usort($courses, function($a, $b) {
     font-size: 1.2em;
 }
 
+/* เเก้เเล้วววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววววว*/
 .course-details-2 {
-    font-size: 0.9em;
+    font-size: 0.5em;
 }
-
        /* กำหนดลักษณะของ sidebar-heading */
 .sidebar-heading {
     display: flex;
@@ -495,8 +447,8 @@ usort($courses, function($a, $b) {
 
 .profile-img {
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
     margin-right: 15px;
     object-fit: cover;
 }
@@ -507,121 +459,18 @@ usort($courses, function($a, $b) {
 }
 
 .profile-info strong {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     color: #333;
 }
 
 .profile-info small {
-    font-size: 0.9rem;
+    font-size: 0.6rem;
     color: #666;
 }
 
 .responsive-div {
     margin-left: 20px;
     font-size: 1.2em; /* ขนาดตัวอักษร */
-}
-
-/* ปรับสำหรับหน้าจอขนาดเล็ก */
-@media screen and (max-width: 1024px) {
-    .sidebar-heading {
-        padding: 15px;
-    }
-
-    #sidebar-wrapper {
-        width: 300px;
-        min-height: 100vh;
-        overflow-y: auto; /* เพิ่มคุณสมบัติ overflow */
-    }
-
-    .profile-info {
-        font-size: 0.9rem;
-    }
-
-    .profile-img {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
-    }
-
-    .profile-info strong {
-        font-size: 1.1rem;
-    }
-
-    .profile-info small {
-        font-size: 0.8rem;
-    }
-
-    .list-group-item {
-        font-size: 1.25rem; /* ลดขนาดฟอนต์ในหน้าจอขนาดกลาง */
-    }
-
-    .list-group-item i {
-        font-size: 1.25rem; /* ลดขนาดไอคอนในหน้าจอขนาดกลาง */
-    }
-
-    .responsive-div {
-        margin-left: 20px; /* ลดระยะห่างในหน้าจอขนาดกลาง */
-        font-size: 1.2em; /* ปรับขนาดตัวอักษรลงเล็กน้อย */
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .sidebar-heading {
-        padding: 10px;
-    }
-
-    #sidebar-wrapper {
-        position: fixed;
-        left: -250px;
-        transition: all 0.3s ease;
-        z-index: 1050;
-    }
-
-    #wrapper.sidebar-active #sidebar-wrapper {
-        left: 0;
-    }
-
-    .profile-info {
-        font-size: 0.7rem;
-    }
-
-    .circle-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 0.8rem;
-    }
-
-    .course-info {
-        font-size: 0.7rem;
-    }
-
-    .profile-img {
-        width: 40px;
-        height: 40px;
-        margin-right: 8px;
-    }
-
-    .profile-info strong {
-        font-size: 1rem;
-    }
-
-    .profile-info small {
-        font-size: 0.7rem;
-    }
-
-    .list-group-item {
-        font-size: 1rem; /* ลดขนาดฟอนต์ในหน้าจอขนาดเล็ก */
-    }
-
-    .list-group-item i {
-        font-size: 1.25rem; /* ลดขนาดไอคอนในหน้าจอขนาดกลาง */
-    }
-
-    .responsive-div {
-        margin-left: 20px; /* ลดระยะห่างในหน้าจอขนาดเล็ก */
-        font-size: 1.1em; /* ปรับขนาดตัวอักษรเล็กลง */
-    }
-
 }
 
 @media screen and (max-width: 640px) {
@@ -648,9 +497,10 @@ usort($courses, function($a, $b) {
     }
 
     .profile-img {
-        width: 30px;
-        height: 30px;
+        width: 50px;
+        height: 50px;
         margin-right: 5px;
+        margin-bottom: 10px;
     }
 
     .profile-info strong {
@@ -673,6 +523,10 @@ usort($courses, function($a, $b) {
         margin-left: 20px; /* ลดระยะห่างให้เล็กลงในหน้าจอมือถือ */
         font-size: 1em; /* ปรับขนาดตัวอักษรให้อยู่ในขนาดที่เหมาะสม */
     }
+
+    .course-details-2 {
+    font-size: 0.7em;
+}
 
 }
 
@@ -706,13 +560,16 @@ usort($courses, function($a, $b) {
         border: none; /* ไม่มีเส้นขอบ */
         border-radius: 8px; /* ขอบปุ่มโค้งมน */
         text-decoration: none; /* ลบเส้นขีดใต้ลิงก์ */
+        transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     }
     #logout-button i {
-        margin-right: 0.5rem;
+        width: 30px; /* กำหนดความกว้างของไอคอนให้เท่ากันทุกลิงก์ */
+        text-align: center; /* จัดไอคอนให้อยู่กึ่งกลาง */
     }
     #logout-button:hover {
-        background-color: #f8f9fa; /* สีพื้นหลังเมื่อวางเมาส์เหนือปุ่ม */
-        color: #000000; /* สีตัวหนังสือเมื่อวางเมาส์เหนือปุ่ม */
+        background-color: #f0f0f0; /* เปลี่ยนสีพื้นหลังเมื่อเมาส์เลื่อนมาที่ปุ่ม */
+        transform: scale(1.20); /* ขยายปุ่มเล็กน้อย */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาให้ปุ่ม */
     }
     .text-center h5 {
     margin-bottom: 20px; /* ช่องว่างด้านล่างของข้อความ */
@@ -724,21 +581,34 @@ usort($courses, function($a, $b) {
     padding: 10px 15px;
     border: none;
     border-radius: 0;
-    background: transparent; /* ลบพื้นหลัง */
-    color: #000; /* สีข้อความเป็นสีดำ */
+    background: transparent; /* Transparent background */
+    color: #000; /* Black text */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 .list-group-item i {
     margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 15px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .list-group-item-action:hover {
-    background: rgba(0, 0, 0, 0.1); /* เพิ่มสีพื้นหลังอ่อน ๆ เมื่อ hover */
+    background-color: #f0f0f0; /* เปลี่ยนสีพื้นหลังเมื่อเมาส์เลื่อนมาที่ปุ่ม */
+    transform: scale(1.20); /* ขยายปุ่มเล็กน้อย */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาให้ปุ่ม */
+    border-radius: 6%;
 }
 
     </style>
 </head>
 <body>
+     <!-- เมนูนนนนนนนนนนนนนนนนนนนนนนนนนนน-->
 <div class="d-flex" id="wrapper">
 <div class="overlay" id="overlay"></div> <!-- เพิ่ม overlay -->
     <!-- Sidebar-->
@@ -746,95 +616,96 @@ usort($courses, function($a, $b) {
         <div class="sidebar-heading">
             <?php if ($isLoggedIn && !empty($userImage)): ?>
                 <img src="<?php echo $userImage; ?>" alt="User Profile" class="profile-img">
-            <?php endif; ?>
+            <?php endif;?>
             <div class="profile-info">
                 <strong><?php echo $isLoggedIn ? $userName : 'Project'; ?></strong>
                 <?php if ($isLoggedIn): ?>
                     <small><?php echo $userEmail; ?></small>
-                <?php endif; ?>
+                <?php endif;?>
             </div>
         </div>
         <br>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-4" href="addtable.php" style="font-size: 1.5rem;">
-                <i class="fas fa-home fa-lg"></i> หน้าเเรก
+            <a class="list-group-item list-group-item-action list-group-item-light mb-2" href="addtable.php" style="font-size: 1rem; ">
+                <i class="fas fa-home fa-lg" style="font-size: 1.5rem; margin-left: 10px;" ></i> HOME
             </a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-4" href="http://localhost/myproject/calendar.php" style="font-size: 1.5rem;">
-                <i class="fas fa-calendar fa-lg"></i> ปฏิทิน
+            <a class="list-group-item list-group-item-action list-group-item-light mb-2" href="http://localhost/myproject/calendar.php" style="font-size: 1rem;">
+                <i class="fas fa-calendar fa-lg" style="font-size: 1.5rem; margin-left: 10px;"></i> CALENDAR
             </a>
         </div>
         <br>
         <hr>
-        <div class="responsive-div">ENROLLED</div>
+        <div class="responsive-div" style="margin-left: 30px;">ENROLLED</div>
             <div class="btn-container-2">
                 <?php
-                // Courses list in Menu
-                foreach ($courses as $course): 
-                    $color = getColorForCourse($course['subject_id']);
-                    $subjectName = htmlspecialchars($course['subject_name']);
-                    $day_of_week = htmlspecialchars($course['day_of_week']);
-                    // ตัดข้อมูลให้แสดงแค่ 3 ตัวอักษรแรก
-                    $shortName = mb_substr($day_of_week, 0, 3);
-                ?>
+// Courses list in Menu
+foreach ($courses as $course):
+    $color = getColorForCourse($course['subject_id']);
+    $subjectName = htmlspecialchars($course['subject_name']);
+    $day_of_week = htmlspecialchars($course['day_of_week']);
+    // ตัดข้อมูลให้แสดงแค่ 3 ตัวอักษรแรก
+    $shortName = mb_substr($day_of_week, 0, 3);
+    ?>
 
-                <a href="weeksubject.php?course_id=<?php echo htmlspecialchars($course['subject_id']); ?>" class="btn btn-circle">
-                    <div class="circle-icon" style="background-color: <?php echo $color; ?>;">
-                        <span class="circle-text"><?php echo $shortName; ?></span>
-                    </div>
+			                <a href="weeksubject.php?course_id=<?php echo htmlspecialchars($course['subject_id']); ?>" class="btn btn-circle">
+			                    <div class="circle-icon" style="background-color: <?php echo $color; ?>; margin-left: 9px;">
+			                        <span class="circle-text"><?php echo $shortName; ?></span>
+			                    </div>
 
-                    <div class="course-info">
-                        <div class="info-row">
-                            <span class="subject-namee"><?php echo $subjectName; ?></span>
-                        </div>
-                        <div class="info-row">
-                            <span class="course-details-2">
-                                (<?php echo htmlspecialchars($course['start_time']) . " - " . htmlspecialchars($course['end_time']); ?>) <?php echo htmlspecialchars($course['day_of_week']); ?>
-                                กลุ่ม: <?php echo htmlspecialchars($course['section']); ?>
-                            </span>
-                        </div>
-                    </div>
-                </a>
-                <?php endforeach; ?>
+			                    <div class="course-info">
+			                        <div class="info-row">
+			                            <span class="subject-namee"><?php echo $subjectName; ?></span>
+			                        </div>
+			                        <div class="info-row">
+			                            <span class="course-details-2">
+			                                (<?php echo htmlspecialchars($course['start_time']) . " - " . htmlspecialchars($course['end_time']); ?>) <?php echo htmlspecialchars($course['day_of_week']); ?>
+			                                กลุ่ม: <?php echo htmlspecialchars($course['section']); ?>
+			                            </span>
+			                        </div>
+			                    </div>
+			                </a>
+			                <?php endforeach;?>
             </div>
             <hr>
             <div class="list-group list-group-flush">
             <!-- Other links -->
-            <a href="<?php echo $logoutUrl; ?>" id="logout-button" class="btn btn-danger">
-                <i class="fas fa-sign-out-alt"></i> ออกจากระบบ
+            <a href="<?php echo $logoutUrl; ?>" id="logout-button" class="list-group-item list-group-item-action list-group-item-light mb-2" style="font-size: 1rem;">
+                <i class="fas fa-sign-out-alt" style="font-size: 1.5rem; margin-left: 5px;"></i>LOG OUT
             </a>
             </div>
     </div>
+     <!-- ถึงนี่นนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนนน-->
         <!-- Page content wrapper-->
         <div id="page-content-wrapper">
         <!-- Top navigation-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
         <div class="d-flex align-items-center">
             <button class="btn" id="sidebarToggle" style="border: none; background-color: transparent; padding: 0;">
-                <i class="fas fa-bars" style="font-size: 36px; color: black;"></i>
+                <i class="fas fa-bars" style="font-size: 28px; color: black;"></i>
             </button>
-            <span style="font-size: 24px; margin-left: 10px; color: black;">Classroom</span>
+            <span style="font-size: 1.3rem; margin-left: 20px; color: black;">Classroom</span>
         </div>
     </div>
 </nav>
 
 <!-- Page content -->
 <div class="container mt-5">
-    <h1>TIMETABLE</h1>
+    <h1 >TIMETABLE</h1>
     <hr>
     <!-- ส่วนของ HTML -->
     <div class="filter-container">
             <form action="tabledetails.php" method="GET" class="mb-3">
                 <div class="form-group">
-                    <label for="academic_semester" class="form-label">ACADEMIC_SEMESTER:</label>
+                    <label for="academic_semester" class="form-label">SEMESTER:</label>
                     <select id="academic_semester" name="academic_semester" class="form-select" onchange="this.form.submit()">
                         <option value="">Select Academic Year & Semester</option>
                         <?php foreach ($academicSemesters as $row): ?>
-                            <option value="<?= htmlspecialchars($row['academic_year']) . '-' . htmlspecialchars($row['semester']) ?>"
-                                <?= isset($_GET['academic_semester']) && $_GET['academic_semester'] == htmlspecialchars($row['academic_year']) . '-' . htmlspecialchars($row['semester']) ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($row['semester']) ?> / <?= htmlspecialchars($row['academic_year']) ?>
+                            <option value="<?=htmlspecialchars($row['academic_year']) . '-' . htmlspecialchars($row['semester'])?>"
+                                <?=isset($_GET['academic_semester']) && $_GET['academic_semester'] == htmlspecialchars($row['academic_year']) . '-' . htmlspecialchars($row['semester']) ? 'selected' : ''?>>
+                                <?=htmlspecialchars($row['semester'])?> / <?=htmlspecialchars($row['academic_year'])?>
                             </option>
-                        <?php endforeach; ?>
+                        <?php endforeach;?>
                     </select>
                 </div>
             </form>
@@ -846,13 +717,13 @@ usort($courses, function($a, $b) {
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
-                    <th>รหัสวิชา</th>
-                    <th>ชื่อวิชา</th>
-                    <th>กลุ่มเรียน</th>
-                    <th>วันเรียน</th>
-                    <th>เวลาเข้าเรียน</th>
-                    <th>เวลาสิ้นสุด</th>
-                    <th>สถานที่</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Section</th>
+                    <th>Day</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Classroom</th>
                 </tr>
             </thead>
             <tbody>
@@ -868,35 +739,35 @@ usort($courses, function($a, $b) {
                             <?php echo htmlspecialchars($course['room_number']) . ' (' . htmlspecialchars($course['building']) . ', ' . htmlspecialchars($course['floor']) . ')'; ?>
                         </td>
                     </tr>
-                <?php endforeach; ?>
+                <?php endforeach;?>
             </tbody>
         </table>
         <!-- ถ้าไม่เจอวิชาของอาจารย์คนนี้ -->
     <?php else: ?>
         <p>No courses found for <?php echo htmlspecialchars($userName); ?>.</p>
-    <?php endif; ?>
+    <?php endif;?>
     </div>
     <br>
         <h2>Classroom</h2>
         <hr>
         <br>
         <div class="btn-container">
-    <?php 
-    foreach ($courses as $course): 
-        $color = getColorForCourse($course['subject_id']);
+    <?php
+foreach ($courses as $course):
+    $color = getColorForCourse($course['subject_id']);
     ?>
-    <!-- ส่ง URL ไปที่ section -->
-        <a href="../web_app/section/import-students/manage-members.php?subject_id=<?php echo htmlspecialchars($course['subject_id']); ?>" class="btn btn-details" style="background-color: <?php echo $color; ?>;">
-            <span class="subject-name"><?php echo htmlspecialchars($course['subject_name']); ?></span><br>
-            <span class="course-details">
-                (<?php echo htmlspecialchars($course['start_time']) . " - " . htmlspecialchars($course['end_time']); ?>) <?php echo htmlspecialchars($course['day_of_week']); ?><br>
-                กลุ่ม: <?php echo htmlspecialchars($course['section']); ?>
-            </span>
-        </a>
-    <?php endforeach; ?>
+			    <!-- ส่ง URL ไปที่ section -->
+			        <a href="../web_app/section/import-students/manage-members.php?subject_id=<?php echo htmlspecialchars($course['subject_id']); ?>" class="btn btn-details" style="background-color: <?php echo $color; ?>;">
+			            <span class="subject-name"><?php echo htmlspecialchars($course['subject_name']); ?></span><br>
+			            <span class="course-details">
+			                (<?php echo htmlspecialchars($course['start_time']) . " - " . htmlspecialchars($course['end_time']); ?>) <?php echo htmlspecialchars($course['day_of_week']); ?><br>
+			                กลุ่ม: <?php echo htmlspecialchars($course['section']); ?>
+			            </span>
+			        </a>
+			    <?php endforeach;?>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/scriptss.js"></script>
+<script src="js/scripts.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var sidebarToggle = document.getElementById('sidebarToggle');

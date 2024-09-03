@@ -51,7 +51,7 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $week_date = $row["week_date"];
+    $week_date = date('d-m-Y', strtotime($row['week_date'])); // จัดรูปแบบวันที่เป็น วัน-เดือน-ปี
     $on_time_time = $row["on_time_time"];
     $late_time = $row["late_time"];
     $absent_time = $row["absent_time"];
@@ -110,6 +110,9 @@ $url_home = './index.php';
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
             }
+            .container-form p {
+                font-size: 12px;
+            }            
             /* Upload images */
             .container-members-fluid {
                 width: 100%;
@@ -119,6 +122,9 @@ $url_home = './index.php';
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
                 text-align: center;            
+            }
+            .container-members-fluid p {
+                font-size: 13px;
             }
             /* Detection Btn */
             #url_Face_detection {
@@ -164,6 +170,9 @@ $url_home = './index.php';
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
             }
+            .container-form p {
+                font-size: 14px;
+            }            
             /* Upload images */
             .container-members-fluid {
                 width: 475px;
@@ -173,6 +182,9 @@ $url_home = './index.php';
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
                 text-align: center;            
+            }
+            .container-members-fluid p {
+                font-size: 14px;
             }
             /* Detection Btn */
             #url_Face_detection {
@@ -309,7 +321,7 @@ $url_home = './index.php';
                 <div class="container-form">
                     <!-- Top Details -->
                     <div class="mt-3">
-                        <h3><b>Condition Attendance</b></h3><br>
+                        <h4><b>Condition Attendance</b></h4><br>
                         <p>Subject: <?php echo htmlspecialchars($subject); ?></p>
                         <p>Week: <?php echo htmlspecialchars($week_number); ?></p>
                         <p>Date: <?php echo htmlspecialchars($week_date); ?></p><br>
