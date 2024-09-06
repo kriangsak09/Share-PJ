@@ -9,39 +9,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Student</title>
     <!-- เชื่อมโยงกับ Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../section/navigation.css">
     <link rel="stylesheet" href="./manage-member_responsive.css">
     <link rel="stylesheet" href="./0_student_styles.css">
 </head>
 <body>
     <div class="d-flex" id="wrapper">
 
+        <!-- Include Setting navigation -->
+        <?php include('../component/setting_nav.php'); ?>
+
+        <!-- Include navigation -->
+        <?php include('../component/navigation.php'); ?>
+
         <!-- Page content wrapper-->
         <div class="page-content-wrapper">
-
-            <!-- Include navigation -->
-            <?php //include('../component/navigation.php'); ?>
-
-            <!-- Menu Bar class "navbar-custom" -->
-            <nav class="navbar navbar-expand-lg navbar-custom border-bottom">                
-                <button class="navbar-toggler" style="margin-left: 10px;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                        <li class="nav-item active"><a class="nav-link" href="javascript:window.history.back()">Back</a></li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="<?php echo htmlspecialchars($url_members); ?>">Manage Members</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="<?php echo htmlspecialchars($url_attendance); ?>">Attendance Check</a>
-                        </li>
-                    </ul>
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center">
+                        <button class="btn" id="sidebarToggle" style="border: none; background-color: transparent; padding: 0;">
+                            <i class="fas fa-bars" style="font-size: 28px; color: black;"></i>
+                        </button>
+                        <span style="font-size: 1.3rem; margin-left: 20px; color: black;">Classroom</span>
+                    </div>
                 </div>
             </nav>
-            <!-- End Menu Bar -->
 
             <!-- Page content-->
             <div class="container mt-5">
@@ -237,6 +235,7 @@
 
     </div>
     <!-- เชื่อมโยงกับ Bootstrap JS และ jQuery -->
+    <script src="../js/scripts.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -253,6 +252,11 @@
         // เมื่อเลือกไฟล์แล้วให้ส่งฟอร์มทันที
         document.getElementById('importForm').submit();
     });
+    </script>
+    <script>
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.getElementById('wrapper').classList.toggle('toggled');
+        });
     </script>
 </body>
 </html>

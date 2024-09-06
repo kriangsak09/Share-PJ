@@ -16,7 +16,6 @@ if (!empty($userEmail)) {
 // ตรวจสอบว่าผู้ใช้มีการล็อกอินหรือไม่
 $isLoggedIn = !empty($userEmail);
 
-// Logout Bug!
 $logoutUrl = $isLoggedIn ? 'http://localhost:5173/' : '#';
 
 if (isset($_GET['logout'])) {
@@ -321,7 +320,7 @@ if (isset($_GET['logout'])) {
         <div class="container mt-5">
             <!-- Topic -->
             <div class="d-flex align-items-center mb-4">
-                <h1 class="me-4" >JOIN CLASSROOM</h1>
+                <h1>JOIN CLASSROOM</h1>
             </div>
     <hr>
     <br>

@@ -99,8 +99,8 @@
         width: 200px; /* Facty */
     }
     .next-btn {
-        font-size: 10px; /* ขนาดฟอนต์ */
-        padding: 4px 8px; /* ขนาด padding ของปุ่ม */
+        font-size: 12px; /* ขนาดฟอนต์ */
+        padding: 6px 12px; /* ขนาด padding ของปุ่ม */
         display: inline-block;
         width: 100px; /* กำหนดความกว้างของปุ่ม */
         text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
@@ -108,10 +108,10 @@
         margin: 3px;
     }
     .del_mul-btn {
-        font-size: 12px !important;
-        padding: 6px 12px !important;
+        font-size: 10px !important;
+        padding: 5px 10px !important;
         display: inline-block !important;
-        width: 100px !important;
+        width: 60px !important;
         text-align: center !important;
         line-height: 1.5 !important;
         margin-bottom: 10px !important;
@@ -233,10 +233,10 @@
         margin: 3px;
     }
     .del_mul-btn {
-        font-size: 13px;
+        font-size: 10px;
         padding: 8px 16px;
         display: inline-block;
-        width: 100px;
+        width: 80px;
         text-align: center;
         line-height: 1.5;
         margin-bottom: 10px;

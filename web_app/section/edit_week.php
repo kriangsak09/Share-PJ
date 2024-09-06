@@ -3,7 +3,7 @@ include('config.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $week_number = isset($_GET['week_number']) ? $_GET['week_number'] : '';
-    $id = isset($_GET['id']) ? $_GET['id'] : '';
+    $table_name = isset($_GET['table_name']) ? $_GET['table_name'] : '';
     $table_weeks_name = isset($_GET['table_weeks_name']) ? strtolower($_GET['table_weeks_name']) : '';
 
     // Fetch existing data
@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $stmt->bindParam(':week_number', $week_number);
     $stmt->execute();
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
 }
 ?>
 <!DOCTYPE html>
@@ -40,8 +41,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             Editing Week Number: <?php echo htmlspecialchars($week_number); ?>
         </div>
         <form action="update_week.php" method="POST">
-            <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
             <input type="hidden" name="week_number" value="<?php echo htmlspecialchars($week_number); ?>">
+            <input type="hidden" name="table_name" value="<?php echo htmlspecialchars($table_name); ?>">
+            <input type="hidden" name="table_weeks_name" value="<?php echo htmlspecialchars($table_weeks_name); ?>">
             <div class="mb-3">
                 <label for="week_date" class="form-label">Week Date</label>
                 <input type="date" class="form-control" id="week_date" name="week_date" value="<?php echo htmlspecialchars($data['week_date']); ?>" required>
@@ -62,7 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             <a href="javascript:window.history.back()" class="btn btn-secondary custom-btn">Cancel</a>
         </form>
     </div>
-            <!-- Include footer -->
-            <?php include('./component/footer_details.php'); ?>
+
+    <?php include('./component/footer_details.php'); ?>
+
 </body>
 </html>
